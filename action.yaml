@@ -1,0 +1,27 @@
+name: Apply variable set to a workspace
+author: Mattias Fjellström (mattias.fjellstrom [at] gmail.com)
+description: Apply a variable set to a Terraform Cloud workspace
+
+inputs:
+  organization:
+    description: Terraform Cloud organization name
+  workspace:
+    description: Terraform Cloud workspace name
+  variable_set:
+    required: true
+    description: Name of the variable set to apply to the workspace
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - -organization
+    - ${{ inputs.organization }}
+    - -workspace
+    - ${{ inputs.workspace }}
+    - -varset
+    - ${{ inputs.variable_set }}
+
+branding:
+  icon: star
+  color: blue
